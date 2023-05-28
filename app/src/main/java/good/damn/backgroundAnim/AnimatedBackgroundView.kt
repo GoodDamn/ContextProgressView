@@ -41,7 +41,7 @@ class AnimatedBackgroundView : View {
 
     private var mDensity: Float = 1.0f;
 
-    private var mCountRenders: Int = 100;
+    private var mCountRenders: Int = 200;
 
 
     private fun generatePosition(exp: Int): Float {
@@ -49,7 +49,7 @@ class AnimatedBackgroundView : View {
     }
 
     private fun createFrame() {
-        val linesCount = 100;
+        val linesCount = 200;
         mBeginX = FloatArray(linesCount);
         mBeginY = FloatArray(linesCount);
 
@@ -88,8 +88,6 @@ class AnimatedBackgroundView : View {
             val yLength = (mEndY[i] - mBeginY[i]).toDouble();
             val h = hypot(xLength, yLength);
 
-            Log.d(TAG, "onLayout: I: $i HYPOTENUSE $h direction: ${xLength / h}");
-
             mLengthX[i] = (xLength / h * lineLength).toInt();
             mLengthY[i] = (yLength / h * lineLength).toInt();
 
@@ -116,7 +114,6 @@ class AnimatedBackgroundView : View {
         mAnimator.duration = 4000;
         mAnimator.addUpdateListener {
             val frac: Float = mAnimator.animatedValue as Float;
-            Log.d(TAG, "addUpdateListener: $frac");
             for (i in mBeginX.indices) {
                 mProcessX[i] = mBeginX[i]+(mEndX[i]-mBeginX[i]) * frac;
                 mProcessY[i] = mBeginY[i]+(mEndY[i]-mBeginY[i]) * frac;
