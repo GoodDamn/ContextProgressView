@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val animatedView: AnimatedBackgroundView = findViewById(R.id.activity_animatedView);
 
         Thread(Runnable {
-            val url = URL("https://file-examples.com/storage/fe629099fc646eff79529f9/2017/11/file_example_WAV_10MG.wav");
+            val url = URL("https://www.learningcontainer.com/download/sample-50-mb-pdf-file/?wpdmdl=3675&refresh=646720bc758901684480188");
 
             val connection = url.openConnection();
 
@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
             val downloadStream = url.openStream();
             var i: Int;
-            val buffer = ByteArray(512);
+            val buffer = ByteArray(2048);
             val baos = ByteArrayOutputStream();
             while (true) {
                 i = downloadStream.read(buffer);
-                Log.d(TAG, "onCreate: DOWNLOAD FILE PROCESS... $i ${baos.size()}")
+                //Log.d(TAG, "onCreate: DOWNLOAD FILE PROCESS... $i ${baos.size()}")
                 animatedView.linesCount = (100 - baos.size() / divider).toInt();
                 if (i == -1)
                     break;
@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: DOWNLOAD PROCESS FINISHED! ${baos.toByteArray().size}");
             baos.close();
             downloadStream.close();
+
+            Thread.currentThread().interrupt();
         }).start();
     }
 }

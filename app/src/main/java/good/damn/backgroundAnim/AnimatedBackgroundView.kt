@@ -64,7 +64,8 @@ class AnimatedBackgroundView : View {
     }
 
     private fun configFrame() {
-        mPaint.strokeWidth = 8.0f * mDensity * mRandom.nextFloat();
+        mPaint.strokeWidth = 3.0f * mDensity * mRandom.nextFloat();
+        mPaint.strokeWidth += 3.0f;
         val lengthLimit = (mDensity * 35).toInt();
 
         mCountRenders = linesCount;
@@ -112,7 +113,7 @@ class AnimatedBackgroundView : View {
         mDebugPaint.strokeWidth = 3.0f;
 
         mAnimator.setValues(PropertyValuesHolder.ofFloat("setValues", .0f,1.0f));
-        mAnimator.duration = 3000;
+        mAnimator.duration = 4000;
         mAnimator.addUpdateListener {
             val frac: Float = mAnimator.animatedValue as Float;
             Log.d(TAG, "addUpdateListener: $frac");
@@ -136,7 +137,7 @@ class AnimatedBackgroundView : View {
 
         mAnimator.repeatMode = ValueAnimator.RESTART;
         mAnimator.repeatCount = ValueAnimator.INFINITE;
-        mAnimator.startDelay = 2000;
+        mAnimator.startDelay = 1500;
         mAnimator.start();
     }
 
